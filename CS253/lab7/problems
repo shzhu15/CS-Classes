@@ -1,0 +1,19 @@
+1. exp1: delete not called
+
+2. exp2: out of range of the array
+
+3. exp3: x has no value, it was only initalized, never assigned a value
+
+4. exp4: x has no value, it was only initalized, never assigned a value
+
+5. exp5: accessing value/memory out of range of the array
+
+6. exp6: accessing a memory segment that was delete
+
+7. exp7: deleting pointer p, not the array of pointer
+
+8. exp8: wrong call, free only for malloc, calloc
+
+9. exp9: address of pointer was changed
+
+10. exp10: unsigned int cant be negative as unsigned int doesnt use bit for sign

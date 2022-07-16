@@ -1,0 +1,25 @@
+'
+#! /bin/bash
+
+old_suffix=$1
+new_suffix=$2
+
+if [[ $# > 1 ]];
+  then
+    stderr<"No arguments supplied"
+  fi
+if [ $# > 2 ];
+then
+  stderr<"too many arguements"
+fi
+for f in *.$old_suffix
+do
+   mv ${f%.*}.$old_suffix  ${f%.*}.$new_suffix
+   echo Rename $f to $new_name
+
+if [ $? -eq 0 ];
+then
+   echo"fail"
+fi
+
+done

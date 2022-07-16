@@ -1,0 +1,22 @@
+1. cause it can be of any type
+
+2. global new, class new, class new, global delete, class delete, class delete
+   inconvenient to require an instance of the type to create one
+
+3. methods have been declared privated
+
+4. method has been declared but delete, the methods cant be called
+
+5. to protect its inheritance
+
+6. check whether not the object exists or not, if so then delete it.
+
+7.
+
+8. 8, difference is the memory allocation
+   8, difference is the memory allocation
+
+10. yes bar will inherit from foo. no if bar is bigger than foo the it wont work.
+    I would fix this by adding a size check, if bar > foo, then use bar new instead of foo new
+
+11.

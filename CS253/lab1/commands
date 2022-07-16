@@ -1,0 +1,38 @@
+Sharon Zhu
+Recitation 1
+
+
+cd ~info
+pwd
+cd ~cs253/bin
+pwd
+cd
+
+cat ~info/printers
+cat ~cs253/pub/hamlet.txt
+less ~cs253/pub/hamlet.txt
+head ~cs253/pub/hamlet.txt
+tail ~cs253/pub/hamlet.txt
+
+cp ~cs253/pub/dwarfs dwarfs
+mv dwarfs seven
+mkdir Zulu
+mv seven ./Zulu/
+ls -l seven
+rm -r Zulu
+
+cp ~cs253/pub/dwarfs dwarfs
+wc dwarfs
+diff dwarfs ~cs253/pub/dwarfs
+grep -e 'u' dwarfs
+
+date >> now
+cat ~cs253/pub/dwarfs >> now
+grep -e 'xy' ~cs253/pub/common-words.txt | sort
+ 
+ls *.*
+cp *.* ~shzhu
+
+cp dwarfs ~shzhu
+chmod ug=rw dwarfs
+ls -l dwarfs

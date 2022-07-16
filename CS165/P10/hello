@@ -1,0 +1,16 @@
+digraph BST {
+    ratio = 1.0;
+    node [style=filled]
+    node [fillcolor=darkslateblue]
+    node [fixedsize=true]
+    node [shape=oval]
+    node [width=6]
+    node [height=4]
+    node [fontname=Arial]
+    node [fontsize=60]
+    node [fontcolor=white]
+    edge [dir=none]
+    edge [penwidth=24]
+    edge [fontname=Arial]
+    edge [fontsize=110]
+}

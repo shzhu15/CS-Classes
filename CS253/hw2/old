@@ -1,0 +1,478 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+
+using namespace std;
+
+int main(int argc, char *argv[]) {
+    string line;
+    string everything;
+    string array;
+    string start = "Alpha";
+    string rotate;
+    string mirrorCheck;
+    string mirror;
+    char reading;
+    int countX = 0;
+    int countY = 0;
+    int x = 0;
+    int rotation = 0;
+    bool flag = false;
+    int fileTrack = argc - 2;
+
+    //check if enough arguments
+    cout << argv[0] << argv[1] << argv[2] << '\n';
+    if(argc < 1) {
+      cerr << "not enough arguments\n";
+      return -1;
+    }
+
+
+    //getting rotation
+    rotate = argv[1];
+    for(unsigned int i = 0; i < rotate.length(); i++) {
+//      cout << "argv: " << argv[1] << '\n';
+//      cout << "argv length: " << rotate.length() << '\n';
+      rotation = stoi(rotate);
+      if(rotate[i] == 'm') {
+        mirrorCheck = 'm';
+      }
+    }
+    //rotation check if valid
+    switch(rotation) {
+      case 0:
+        break;
+      case 90:
+        break;
+      case 180:
+        break;
+      case 270:
+        break;
+      default:
+        cerr << "invaild transformation: " << argv[1] << '\n';
+        return -1;
+    }
+    if(mirrorCheck != "m" && mirrorCheck.length() > 1) {
+      cerr << "invaild mirror: " << argv[1] << '\n';
+      return -1;
+    }
+
+    //reading from ifstream/file
+    if(argc >= 3) {
+      for(int arg = 3; arg < argc; i++) {
+      }
+      ifstream in(argv[fileTrack]);
+      flag = true;
+      if(!in) {
+        cerr << "invaild file: " << argv[fileTrack] << '\n';
+      }
+      if(in) {
+        in >> line;
+        if(line.compare(start) != 0 || line != start) {
+            cerr << "invaild input in " << argv[fileTrack] << '\n';
+            return -1;
+        }
+
+        if(line.compare(start) || line == start) {                                             //if first line equals Alpha continue
+          while(getline(in, line)) {
+              if(line.length() != 0) {
+              countY++;
+              }
+              if(line.length() == 0 || line.empty() || isspace(line[0])) {
+              countX = 0;
+              }
+              for(unsigned int i = 0; i < line.length(); i++) {
+                reading = line[i];
+                int lineLength = line.length();
+                if(reading == '*' && lineLength <= countX) {
+                  if(line[i+1] == '\0' || isspace(line[i+1]) || line[i+1] == '#') {
+                    for(int j = i; j <= countX-1; j++) {
+                      everything += everything[everything.length()-1];
+                      x = x + 1;
+                    }
+                    break;
+                  }
+                }
+                if(reading == '#') {
+                    break;
+                }
+                if(reading == '\n') {
+                    break;
+                }
+
+                if(reading <= 'Z' && reading >= 'A') {
+                    reading = tolower(reading);
+                }
+                if(reading <= 'z' && reading >= 'a') {
+                    everything += reading;
+                    x = x + 1;
+                }
+                // if (!(isalpha(reading)) && reading != ' ' && reading != '	') {
+                //     cerr << "invaild character in " << argv[0] << '\n';
+                //     return -1;
+                // }
+                if (!(isalpha(reading)) && !isspace(reading)) {
+                    cerr << "invaild character in " << argv[2] << '\n';
+                    return -1;
+                }
+                // if (reading >= 'z' && reading <= 'a') {
+                //   cerr << "invaild input in " << argv[0] << '\n';
+                //   return -1;
+                // }
+
+              }
+              if(countX == 0) {
+                countX = x;
+              }
+              if(countX != x) {
+                cerr << "invaild input, differnt pixel lengths " << argv[2] << '\n';
+                return -1;
+              }
+              x = 0;
+          }
+        }
+      }
+    }
+
+
+    // getline(cin, line);                                                               //read in first line
+    //reading from cin
+    else {
+      cin >> line;
+      if(line.compare(start) != 0 || line != start) {
+          cerr << "invaild input in file" << '\n';
+          return -1;
+      }
+
+      if(line.compare(start) || line == start) {                                             //if first line equals Alpha continue
+        while(getline(cin, line)) {
+            if(line.length() != 0) {
+            countY++;
+            }
+            if(line.length() == 0 || line.empty() || isspace(line[0])) {
+            countX = 0;
+            }
+            for(unsigned int i = 0; i < line.length(); i++) {
+              reading = line[i];
+              int lineLength = line.length();
+              if(reading == '*' && lineLength <= countX) {
+                if(line[i+1] == '\0' || isspace(line[i+1]) || line[i+1] == '#') {
+                  for(int j = i; j <= countX-1; j++) {
+                    everything += everything[everything.length()-1];
+                    x = x + 1;
+                  }
+                  break;
+                }
+              }
+              if(reading == '#') {
+                  break;
+              }
+              if(reading == '\n') {
+                  break;
+              }
+
+              if(reading <= 'Z' && reading >= 'A') {
+                  reading = tolower(reading);
+              }
+              if(reading <= 'z' && reading >= 'a') {
+                  everything += reading;
+                  x = x + 1;
+              }
+              // if (!(isalpha(reading)) && reading != ' ' && reading != '	') {
+              //     cerr << "invaild character in " << argv[0] << '\n';
+              //     return -1;
+              // }
+              if (!(isalpha(reading)) && !isspace(reading)) {
+                  cerr << "invaild character in file" << '\n';
+                  return -1;
+              }
+              // if (reading >= 'z' && reading <= 'a') {
+              //   cerr << "invaild input in " << argv[0] << '\n';
+              //   return -1;
+              // }
+
+            }
+            if(countX == 0) {
+              countX = x;
+            }
+            if(countX != x) {
+              cerr << "invaild input, differnt pixel lengths " << '\n';
+              return -1;
+            }
+            x = 0;
+        }
+      }
+    }
+    //check if string length is 0, if so print and return
+    // if(everything.length() == 0) {
+    //   cout << "Alpha\n";
+    //   return 0;
+    // }
+    // cout << "countX: " << countX << '\n';
+    // cout << "rotation: " << rotation << '\n';
+    // cout << "everything length: " << everything.length() << '\n';
+    // cout << "printing everything: " << everything << '\n';
+
+    //mirror
+    if(mirrorCheck == "m" || mirrorCheck.length() > 0) {
+      int manage = countX - 1;
+      while(everything.length() > 0) {
+        for(int i = 0; i < countX; i++) {
+          mirror += everything[manage-i];
+        }
+        // mirror += "|";
+        everything = everything.substr(countX, everything.length());
+      }
+      everything = "";
+      everything = mirror;
+    }
+    //rotation with just 0
+    if(rotation == 0) {
+      if(flag == false) {
+        cout << "Alpha\n";
+        int track0 = 0;
+        for(unsigned int i = 0; i < everything.length(); i++) {
+          cout << everything[i];
+          track0++;
+          if(track0 == countX) {
+              cout << '\n';
+            track0 = 0;
+          }
+        }
+      }
+      if(flag == true) {
+        remove(argv[2]);
+        ofstream out;
+        out.open(argv[2], ofstream::out);
+        out << "Alpha\n";
+        int track0 = 0;
+        for(unsigned int i = 0; i < everything.length(); i++) {
+          out << everything[i];
+          track0++;
+          if(track0 == countX) {
+              out << '\n';
+            track0 = 0;
+          }
+        }
+      }
+      return 0;
+    }
+
+
+    //rotation for 90
+    if(rotation == 90) {
+      while(everything.length() > 0) {
+        for(unsigned int i = everything.length() - countX; i < everything.length(); i++) {
+          array += everything[i];
+        }
+        everything = everything.substr(0, everything.length() - countX);
+      }
+
+
+      //print array
+      if(flag == false) {
+        cout << "Alpha\n";
+        int track = 0;
+        int counter = 0;
+        int place = 0;
+        while(track < countX) {
+          for(unsigned int i = 0; i < array.length(); i++) {
+            place = i % countX;
+            if(place == counter) {
+              cout << array[i];
+            }
+          }
+          counter++;
+          track++;
+          cout << '\n';
+        }
+      }
+      if(flag == true) {
+        remove(argv[fileTrack]);
+        ofstream out;
+        out.open(argv[fileTrack], ofstream::out);
+        out << "Alpha\n";
+        int track = 0;
+        int counter = 0;
+        int place = 0;
+        while(track < countX) {
+          for(unsigned int i = 0; i < array.length(); i++) {
+            place = i % countX;
+            if(place == counter) {
+              out << array[i];
+            }
+          }
+          counter++;
+          track++;
+          out << '\n';
+        }
+      }
+      return 0;
+    }
+
+    //rotation for 180
+    string change2;
+    if(rotation == 180) {
+      while(everything.length() > 0) {
+        for(unsigned int i = everything.length() - countX; i < everything.length(); i++) {
+          array += everything[i];
+        }
+        everything = everything.substr(0, everything.length() - countX);
+      }
+
+      int track = 0;
+      int counter = 0;
+      int place = 0;
+      while(track < countX) {
+        for(unsigned int i = 0; i < array.length(); i++) {
+          place = i % countX;
+          if(place == counter) {
+            change2 += array[i];
+          }
+        }
+        counter++;
+        track++;
+      }
+      array = "";
+      while(change2.length() > 0) {
+          for(unsigned int i = change2.length() - countY; i < change2.length(); i++) {
+            array += change2[i];
+          }
+          change2 = change2.substr(0, change2.length() - countY);
+      }
+
+      //print array
+      if(flag == false) {
+        cout << "Alpha\n";
+        track = 0;
+        counter = 0;
+        place = 0;
+        while(track < countY) {
+          for(unsigned int i = 0; i < array.length(); i++) {
+            place = i % countY;
+            if(place == counter) {
+              cout << array[i];
+            }
+          }
+          counter++;
+          track++;
+          cout << '\n';
+        }
+      }
+      if(flag == true) {
+        remove(argv[fileTrack]);
+        ofstream out;
+        out.open(argv[fileTrack], ofstream::out);
+        out << "Alpha\n";
+        track = 0;
+        counter = 0;
+        place = 0;
+        while(track < countY) {
+          for(unsigned int i = 0; i < array.length(); i++) {
+            place = i % countY;
+            if(place == counter) {
+              out << array[i];
+            }
+          }
+          counter++;
+          track++;
+          out << '\n';
+        }
+      }
+      return 0;
+    }
+
+    //rotation for 270
+    string change3;
+    if(rotation == 270) {
+      while(everything.length() > 0) {
+        for(unsigned int i = everything.length() - countX; i < everything.length(); i++) {
+          array += everything[i];
+        }
+        everything = everything.substr(0, everything.length() - countX);
+      }
+
+      int track = 0;
+      int counter = 0;
+      int place = 0;
+      while(track < countX) {
+        for(unsigned int i = 0; i < array.length(); i++) {
+          place = i % countX;
+          if(place == counter) {
+            change2 += array[i];
+          }
+        }
+        counter++;
+        track++;
+      }
+      array = "";
+      while(change2.length() > 0) {
+          for(unsigned int i = change2.length() - countY; i < change2.length(); i++) {
+            array += change2[i];
+          }
+          change2 = change2.substr(0, change2.length() - countY);
+      }
+
+      track = 0;
+      counter = 0;
+      place = 0;
+      while(track < countY) {
+        for(unsigned int i = 0; i < array.length(); i++) {
+          place = i % countY;
+          if(place == counter) {
+            change3 += array[i];
+          }
+        }
+        counter++;
+        track++;
+      }
+      array = "";
+      while(change3.length() > 0) {
+          for(unsigned int i = change3.length() - countX; i < change3.length(); i++) {
+            array += change3[i];
+          }
+          change3 = change3.substr(0, change3.length() - countX);
+      }
+
+      //print array
+      if(flag == false) {
+        cout << "Alpha\n";
+        track = 0;
+        counter = 0;
+        place = 0;
+        while(track < countX) {
+          for(unsigned int i = 0; i < array.length(); i++) {
+            place = i % countX;
+            if(place == counter) {
+              cout << array[i];
+            }
+          }
+          counter++;
+          track++;
+          cout << '\n';
+        }
+      }
+      if(flag == true) {
+        remove(argv[fileTrack]);
+        ofstream out;
+        out.open(argv[fileTrack], ofstream::out);
+        out << "Alpha\n";
+        track = 0;
+        counter = 0;
+        place = 0;
+        while(track < countX) {
+          for(unsigned int i = 0; i < array.length(); i++) {
+            place = i % countX;
+            if(place == counter) {
+              out << array[i];
+            }
+          }
+          counter++;
+          track++;
+          out << '\n';
+        }
+        out.close();
+      }
+    }
+    return 0;
+}

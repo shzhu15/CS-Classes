@@ -1,0 +1,8 @@
+P2
+# Shows the word “FEEP” (from the PGM man page)
+0 0	    # twenty-four wide, seven high
+15          # sixteen levels of gray
+
+# this comment is not required
+
+

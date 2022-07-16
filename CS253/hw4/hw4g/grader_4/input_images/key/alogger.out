@@ -1,0 +1,71 @@
+User:  key
+-----------------------------------
+#empty test
+...................................
+empty.alpha:: 1
+empty_comment.alpha:: 1
+simple.alpha:: 0
+empty.pgm:: 1
+simple.pgm:: 0
+ERROR: too many pixels available in /s/bach/a/class/cs253/pub/input_images/empty_bad.pgm
+-----------------------------------
+#width test
+...................................
+empty.alpha:: 0
+simple.alpha:: 5
+empty.pgm:: 0
+simple.pgm:: 10
+-----------------------------------
+#height test
+...................................
+empty.alpha:: 0
+simple.alpha:: 4
+empty.pgm:: 0
+simple.pgm:: 7
+-----------------------------------
+#getpixel test
+...................................
+simple.alpha:(0,0): 25
+simple.alpha:(-1,-2): ERROR: get(-1,-2) attempted on a 5×4 image
+simple.alpha:(1,2): 7
+empty.alpha:(1,2): ERROR: get(1,2) attempted on a 0×0 image
+simple.alpha:(100,200): ERROR: get(100,200) attempted on a 5×4 image
+simple.pgm:(0,0): 5
+simple.pgm:(3,5): 5
+empty.pgm:(3,5): ERROR: get(3,5) attempted on a 0×0 image
+simple.pgm:(-3,-5): ERROR: get(-3,-5) attempted on a 10×7 image
+-----------------------------------
+#range test
+...................................
+simple.alpha:: 26
+simple.pgm:: 6
+range1.pgm:: 151
+-----------------------------------
+#mirror test
+...................................
+-----------------------------------
+#rotate test
+...................................
+-----------------------------------
+#resize test
+...................................
+-----------------------------------
+#write-file test
+...................................
+simple.alpha:: out_simple.alpha
+simple.pgm:: out_simple.pgm
+-----------------------------------
+#read-file test
+...................................
+bad_char.alpha-> ERROR: bad charcter ‘0’
+asterisk_bad.alpha-> ERROR: line contains *, but not at end
+range_bad.pgm-> ERROR: Bad pixel 3 in /s/bach/a/class/cs253/pub/input_images/range_bad.pgm
+-----------------------------------
+#Copy-Ctor test
+...................................
+-----------------------------------
+#Operator-Assignment test
+...................................
+-----------------------------------
+#COUT test
+...................................

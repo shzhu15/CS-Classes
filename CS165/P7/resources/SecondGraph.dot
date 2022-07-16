@@ -1,0 +1,19 @@
+digraph BST {
+        node [style=filled]
+        node [fontname=Arial]
+        edge [arrowType=normal]
+        edge [fillcolor=orchid]
+        root [label="+",shape=square,fillcolor=green]
+        rootL [label="*",shape=square,fillcolor=green]
+        rootR [label="/",shape=square,fillcolor=green]
+        leafLL [label="6",shape=circle,fillcolor=red]
+        leafLR [label="3",shape=circle,fillcolor=red]
+        leafRL [label="7",shape=circle,fillcolor=red]
+        leafRR [label="2",shape=circle,fillcolor=red]
+        root -> rootL
+        root -> rootR
+        rootL -> leafLL
+        rootL -> leafLR
+        rootR -> leafRL
+        rootR -> leafRR
+}
